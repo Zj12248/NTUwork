@@ -1,0 +1,28 @@
+import random
+
+answerDigits = random.sample(range(1, 10), 4)
+count = 0
+print ("answerDigits",answerDigits)
+def checkDigit(userDigits,answerDigits):
+    countA, countB = 0,0
+    for i in range(len(userDigits)):
+        if int(userDigits[i]) == int(answerDigits[i]):
+            countA += 1
+        else:
+            for j in answerDigits:
+                if int(userDigits[i]) == int(j):
+                    countB += 1
+    return countA,countB        
+
+while True:
+    userDigits = input("Please input 4 digits")
+    if len(userDigits) != 4:
+        continue
+    bullsandCows = checkDigit(userDigits,answerDigits)
+    bulls = bullsandCows[0]
+    cows = bullsandCows[1]
+    if bulls == 4:
+        print ("You Win!!")
+        quit()
+    else: 
+        print (bulls,"A (Bulls)",cows,"B (Cows)")
