@@ -1,0 +1,59 @@
+def inputRecord(dataBase,group,idnumber,score):
+    for i in dataBase.keys():
+        if i == group:
+            dataBase[group][idnumber] = score
+            break
+    else:
+        dataBase[group] = {idnumber:score}
+    return dataBase
+    
+def query(dataBase,group,idnumber):
+    print (dataBase[group][idnumber])
+    return
+
+def listGrades(dataBase,group):
+    print (dataBase[group].values())
+    return
+
+def maxGrade(dataBase,group):
+    for i in dataBase[group].values():
+        maxscore = 0
+        if int(i) > maxscore:
+            maxScore = i
+    print(maxScore)
+    return OR USE return max() function
+
+def listGroups(dataBase):
+    print(dataBase.keys())
+    return
+
+dictSchool = {}
+while True:   
+    introText = int(input("Welcome to the grading system! Please enter your option:\
+                        \n1:input record\
+                        \n2:query a student\
+                        \n3:list grades in a group\
+                        \n4:get max in a group\
+                        \n5:list all group names\
+                        \n6:quit\n"))
+                        
+    if introText == 1:
+        group = input("Please input the group name:")
+        idnumber = input("Please input the student id:")
+        score = input("Please input the score:")
+        dictSchool = inputRecord(dictSchool, group, idnumber, score)
+        print(dictSchool)
+    elif introText == 2:
+        group = input("Please input the group name:")
+        idnumber = input("Please input the student id:")
+        query(dictSchool, group, idnumber)
+    elif introText == 3:
+        group = input("Please input the group name:")
+        listGrades(dictSchool, group)
+    elif introText == 4:
+        group = input("Please input the group name:")
+        maxGrade(dictSchool, group)
+    elif introText == 5:
+        listGroups(dictSchool)
+    elif introText == 6:
+        quit()
