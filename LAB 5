@@ -1,0 +1,32 @@
+from sense_hat import SenseHat
+from textcolor import get_color
+sense = SenseHat()
+sense.set_rotation(180)
+
+s = SenseHat()
+
+
+#--- function get_color() ---------------------------
+def get_color(color):
+    keep_looping = True
+    no_of_try=1
+    while keep_looping:
+      color_str=input("Enter the value of the " + color + \
+                    " color for message (0 to 255):")
+      if (0< int(color_str) < 255):
+        return int(color_str)
+      else:
+        print(no_of_try, 'attempt, you have 3 attempts total')
+        no_of_try += 1
+        if no_of_try == 4:
+          color_str = 0
+          print(color, 'defaulted to 0')
+          return int(color_str)
+        
+
+#---------------------------------------------------
+r_int = get_color("red")
+g_int = get_color("green")
+b_int = get_color("blue")
+msg_color = (r_int, g_int, b_int)
+sense.show_message("I got it!", text_colour=msg_color)
