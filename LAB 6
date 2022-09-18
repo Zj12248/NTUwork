@@ -5,17 +5,33 @@ sense = SenseHat()
 
 b = (0,0,0)
 w = (255,255,255)
-board = [[b,b,b,b,b,b,b,b], 
+r = (255,0,0)
+g = (0,255,0)
+board = [[r,r,r,b,b,b,b,r], 
+         [r,b,b,b,b,b,b,r],
+         [b,b,b,b,g,b,b,r],
+         [b,r,r,b,b,b,b,r],
          [b,b,b,b,b,b,b,b],
-         [b,b,b,b,b,b,b,b],
-         [b,b,b,b,b,b,b,b],
-         [b,b,b,b,b,b,b,b],
-         [b,b,b,b,b,b,b,b],
-         [b,b,b,b,b,b,b,b], 
-         [b,b,b,b,b,b,b,b] ]
-y=5				# y coordinate of marble
-x=5				# x coordinate of marble
+         [b,r,b,r,r,b,b,b],
+         [b,b,b,r,b,b,b,r], 
+         [r,r,b,b,b,r,r,r] ]
+
+
+
+
+y=2				# y coordinate of marble
+x=2				# x coordinate of marble
 board[y][x] = w		# a white marble
+
+def check_wall(x,y,new_x,new_y): 
+  if board[new_y][new_x] != r: 
+    return new_x, new_y 
+  elif board[new_y][x] != r: 
+    return x, new_y 
+  elif board[y][new_x] != r: 
+    return new_x, y 
+  else:
+    return x,y
 
 
 def move_marble(pitch,roll,x,y): 
@@ -29,16 +45,26 @@ def move_marble(pitch,roll,x,y):
     new_y += 1    # move up
   elif 359 > roll > 179 and y != 0: 
     new_y -= 1    # move down
+  new_x,new_y = check_wall(x,y,new_x,new_y)
   return new_x, new_y
 
-
-
-while True:
+game_over = 0
+while not (game_over == 1):
   pitch = sense.get_orientation()['pitch'] 
   roll = sense.get_orientation()['roll'] 
-  print("pitch {0} roll {1}".format(round(pitch,0), round(roll,0)))
   board[y][x] = b
   x,y = move_marble(pitch,roll,x,y)
-  board[y][x] = w
-  sense.set_pixels(sum(board,[])) 
-  time.sleep(0.05)
+  if board[y][x] == g:
+    game_over = 1
+  else:
+    board[y][x] = w
+    sense.set_pixels(sum(board,[])) 
+    time.sleep(0.1)
+  
+sense.show_message('yay!!')
+
+# for optional challenge :
+# initiate a time counter, if (10*n),
+# can do random checker, g = b, random 1 [][] to become g
+# or set 4 points which will alt between same 
+
