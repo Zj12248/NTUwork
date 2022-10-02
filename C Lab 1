@@ -1,0 +1,31 @@
+int main()
+{
+    int studentNumber;
+    int mark;
+    printf("Enter Student ID:");
+    scanf("%d", &studentNumber);
+    while (studentNumber != -1){
+        printf("Enter Mark:");
+        scanf("%d", &mark);
+        switch(mark){
+            case 75 ... 100:
+                printf("Grade = A\n");
+                continue;
+            case 65 ... 74:
+                printf("Grade = B\n");
+                continue;
+            case 55 ... 64:
+                printf("Grade = C\n");
+                continue;
+            case 45 ... 54:
+                printf("Grade = D\n");
+                continue;
+            case 0 ... 44:
+                printf("Grade = E\n");
+                continue;
+            default:
+                printf("not in acceptable range of values\n");
+        }
+    }
+    return 0;
+}
