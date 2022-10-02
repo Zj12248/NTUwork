@@ -1,3 +1,5 @@
+Q1:
+
 int main()
 {
     int studentNumber;
@@ -26,6 +28,26 @@ int main()
             default:
                 printf("not in acceptable range of values\n");
         }
+    }
+    return 0;
+}
+
+Q2:
+
+int main()
+{   int lines, sum=0, item, count;
+    printf("Enter number of lines:");
+    scanf("%d", &lines);
+    for (int i = 0; i < lines; i++){
+        count = 0;
+        printf("Enter the list of integers:\n");
+        scanf("%d", &item);
+        while (item != -1) {
+            sum += item;
+            count ++;
+            scanf("%d", &item);
+        }
+        printf("The average is %f\n", (float)sum/count);
     }
     return 0;
 }
