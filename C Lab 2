@@ -33,3 +33,15 @@ void numDigits2(int num, int *result){
     } 
     while (num > 0);
 }
+
+Q2
+
+    int pos=0;
+    do{
+        pos++;
+        if (num%10 == digit){
+        return pos;
+        }
+        num = num/10;
+    } 
+    while (num > 0);
